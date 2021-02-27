@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Lets Fly!</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    @* This is for the mapbox map. *@
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+    @*This is used for the Geocoding Mapbox API*@
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top bg-primary">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img src="~/Uploads/letsFly!.PNG"  id="logo" width="50" height="50"/>
+            @Html.ActionLink("Lets Fly!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                @if (!User.IsInRole("Administrator"))
+                {
+                    <li>@Html.ActionLink("Search Flights", "Flight", "Home")</li>
+
+                    <li>@Html.ActionLink("View Bookings", "Index", "Bookings")</li>
+
+                    <li>@Html.ActionLink("View Airlines", "Index", "Airlines")</li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ratings<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Ratings", "Index", "Ratings")</li>
+                            <li>@Html.ActionLink("Give Rating", "Create", "Ratings")</li>
+                        </ul>
+                    </li>
+                    
+                }
+                @if (User.IsInRole("Administrator"))
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Airlines<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Airlines", "Index", "Airlines")</li>
+                            <li>@Html.ActionLink("Create Airlines", "Create", "Airlines")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Airports<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Airports", "Index", "Airports")</li>
+                            <li>@Html.ActionLink("Create Airports", "Create", "Airports")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Users<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Users", "Index", "Users")</li>
+                            <li>@Html.ActionLink("Send Email", "Send_Email", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Flights<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View Flights", "Index", "Flights")</li>
+                            <li>@Html.ActionLink("Create Flights", "Create", "Flights")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Bookings<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("View bookings", "view", "Bookings")</li>
+                            
+                        </ul>
+                    </li>
+                }
+                @*<li>@Html.ActionLink("Airport", "Index", "Airports")</li>*@
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Lets Fly!</p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>

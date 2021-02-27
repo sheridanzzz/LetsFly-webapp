@@ -1,0 +1,100 @@
+﻿@model LetsFly.Models.Airline
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var sum = ViewBag.RatingSum;
+    var count = ViewBag.RatingCount;
+
+    decimal ratingNo = 0;
+    if (count > 0)
+    {
+        ratingNo = (sum / count);
+    }
+    var totalRating = decimal.Parse(ratingNo.ToString());
+}
+
+    <style>
+        .starFill{
+            background-image:url('/Uploads/StarFill.png');
+            min-width:30px;
+            min-height:30px;
+            display:inline-block;
+        }
+
+        .starBlank{
+            background-image:url('/Uploads/StarBlank.png');
+            min-width:30px;
+            min-height:30px;
+            display:inline-block;
+        }
+    </style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Airline</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.AirlineImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineImg)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ratings)
+        </dt>
+        @if (count == 0)
+        {
+            <dd>
+                @Html.Label("Ratings", "No Rating yet!")
+             </dd>
+        }
+        else
+        {
+            <dd>
+
+                @for (var i = 1; i <= totalRating; i++)
+                {
+                    <span class="starFill"></span>
+                }
+                @for (var i = (totalRating + 1); i <= 5; i++)
+                {
+                    <span class="starBlank"></span>
+                }
+            </dd>
+            }
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

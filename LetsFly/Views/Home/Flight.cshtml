@@ -1,0 +1,103 @@
+﻿@model LetsFly.Models.FlightViewModel
+@{
+    ViewBag.Title = "Flight";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Flight</h2>
+@using (Html.BeginForm("Flight", "Home", FormMethod.Post, new { enctype = "multipart/form-data", name = "myform", id = "myform" }))
+{
+    @Html.AntiForgeryToken()
+
+    if (@ViewBag.Result != null)
+    {
+        <div class="alert alert-info">@ViewBag.Result</div>
+    }
+
+    @:&nbsp;
+    @:&nbsp;
+    @:&nbsp;
+    @:&nbsp;
+    <div class="alert alert-danger" id="validationMessage" style="display: none">
+        <strong>Danger!</strong> Please select both options.
+    </div>
+    <div class="alert alert-danger" id="validationMessage2" style="display: none">
+        <strong>Danger!</strong> Please select a different option.
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Airport, "Origin", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Origin, new SelectList(Model.Airport, "AirportLocationName", "AirportLocationName"), "Select Origin", htmlAttributes: new { @class = "form-control ", @name = "myselect", @id = "myselect" })
+            @Html.ValidationMessageFor(model => model.Airport, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @:&nbsp;
+    @:&nbsp;
+    <div class="form-group">
+        @Html.LabelFor(model => model.Airport, "Destination", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Destination, new SelectList(Model.Airport, "AirportLocationName", "AirportLocationName"), "Select Destination", htmlAttributes: new { @class = "form-control", @name = "myselect2", @id = "myselect2" })
+            @Html.ValidationMessageFor(model => model.Airport, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @:&nbsp;
+    @:&nbsp;
+    <div class="form-group">
+        <div>
+            @Html.LabelFor(m => m.FlightDate, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FlightDate, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(m => m.FlightDate)
+            </div>
+        </div>
+    </div>
+    @*@Html.HiddenFor(model => model.Airport)*@
+    @:&nbsp;
+    @:&nbsp;
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Search" class="btn btn-default" onclick="return submitWith();" />
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-datepicker.min.js" defer></script>
+<script src="~/Scripts/jquery.validate.date.js" defer></script>
+<script src="~/Scripts/FlightDate.js"></script>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery-3.1.1.js")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+
+}
+
+<script>
+    function submitWith() {
+        var atLeastOneIsChecked = $("#myselect").val();
+
+        var atLeastOneIsChecked2 = $("#myselect2").val();
+
+        if (!atLeastOneIsChecked || !atLeastOneIsChecked2) {
+            $('#validationMessage').show();
+
+            return false;
+        } else if (atLeastOneIsChecked == atLeastOneIsChecked2) {
+            $('#validationMessage').hide();
+            $('#validationMessage2').show();
+
+            return false;
+        } else {
+            $('#validationMessage2').hide();
+            return true;
+        }
+
+    }
+</script>
+
+

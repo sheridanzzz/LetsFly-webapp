@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3796af8aaf642aabee5431c7498464e" Name="Diagram1" ZoomLevel="60" >
+        <EntityTypeShape EntityType="LetsFlyModel.User" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LetsFlyModel.Roles" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="LetsFlyModel.Booking" Width="1.5" PointX="5.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LetsFlyModel.Passenger" Width="1.5" PointX="8.75" PointY="0.625" />
+        <EntityTypeShape EntityType="LetsFlyModel.Airport" Width="1.5" PointX="10.375" PointY="4.875" />
+        <EntityTypeShape EntityType="LetsFlyModel.Airline" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="LetsFlyModel.Rating" Width="1.5" PointX="2.875" PointY="4.625" />
+        <EntityTypeShape EntityType="LetsFlyModel.Flight" Width="1.625" PointX="7.5" PointY="4.75" />
+        <AssociationConnector Association="LetsFlyModel.BookingPassenger" />
+        <AssociationConnector Association="LetsFlyModel.RatingAirline" />
+        <AssociationConnector Association="LetsFlyModel.AirlineFlight" />
+        <AssociationConnector Association="LetsFlyModel.UserBooking" />
+        <AssociationConnector Association="LetsFlyModel.UserRoles" />
+        <AssociationConnector Association="LetsFlyModel.UserRating" />
+        <AssociationConnector Association="LetsFlyModel.FlightBooking" />
+        <AssociationConnector Association="LetsFlyModel.AirportFlight" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

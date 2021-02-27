@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<LetsFly.Models.Rating>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ratings</h2>
+
+@using (Html.BeginForm("Index", "Ratings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    if (@ViewBag.Result != null)
+    {
+        <div class="alert alert-info">@ViewBag.Result</div>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RatingNumber)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.RatingImg)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.RatingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RatingDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Airline.AirlineName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RatingNumber)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.RatingImg)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RatingDate)
+                    </td>
+                    <td>
+                        @*Html.DisplayFor(ModelItem => item.RatingDescription)*@
+                        @Html.Raw(item.RatingDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Airline.AirlineName)
+                    </td>
+                    <td>
+                        @if (item.UserId == new Guid(User.Identity.GetUserId()))
+                        {
+                        @*@Html.ActionLink("Details", "Details", new {id = item.RatingId}) |*@
+                            @Html.ActionLink("Delete", "Delete", new {id = item.RatingId})
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+}

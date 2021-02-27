@@ -1,0 +1,150 @@
+﻿@model LetsFly.Models.Flight
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="form-horizontal">
+    <h4>Flight</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FlightNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FlightNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FlightNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ArrivalDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ArrivalDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ArrivalDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AirlineId, "Airline", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("AirlineId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AirlineId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.ArrivalAirport, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ArrivalAirport, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArrivalAirport, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="alert alert-danger" id="validationMessage2" style="display: none">
+        <strong>Danger!</strong> Please select a different option.
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DepartureAirport, "Departure Airport", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.DepartureAirport, new SelectList(@ViewBag.MyList, "AirportLocationName", "AirportLocationName"), "Select Departure Airport", htmlAttributes: new { @class = "form-control ", @name = "myselect2", @id = "myselect2" })
+            @Html.ValidationMessageFor(model => model.DepartureAirport, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ArrivalAirport, "Arrival Airport", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ArrivalAirport, new SelectList(@ViewBag.MyList, "AirportLocationName", "AirportLocationName"), "Select Arrival Airport", htmlAttributes: new { @class = "form-control ", @name = "myselect", @id = "myselect" })
+            @Html.ValidationMessageFor(model => model.ArrivalAirport, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.DepartureAirport, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DepartureAirport, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DepartureAirport, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" onclick="return submitWith();" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery-3.1.1.js")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+
+}
+
+<script>
+    function submitWith() {
+        var atLeastOneIsChecked = $("#myselect").val();
+
+        var atLeastOneIsChecked2 = $("#myselect2").val();
+
+        if (atLeastOneIsChecked == atLeastOneIsChecked2) {
+            $('#validationMessage2').show();
+
+            return false;
+        } else {
+
+            $('#validationMessage2').hide();
+            return true;
+        }
+
+    }
+</script>

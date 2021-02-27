@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LetsFlyModelStoreContainer" CdmEntityContainer="LetsFlyModelContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="UserImg" ColumnName="UserImg" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Roles)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RolesId" ColumnName="RolesId" />
+          <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Booking)">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Passengers">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Passenger)">
+        <MappingFragment StoreEntitySet="Passengers">
+          <ScalarProperty Name="PassengerId" ColumnName="PassengerId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Airports">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Airport)">
+        <MappingFragment StoreEntitySet="Airports">
+          <ScalarProperty Name="AirportId" ColumnName="AirportId" />
+          <ScalarProperty Name="AirportName" ColumnName="AirportName" />
+          <ScalarProperty Name="AirportCode" ColumnName="AirportCode" />
+          <ScalarProperty Name="AirportLocationName" ColumnName="AirportLocationName" />
+          <ScalarProperty Name="AirportLong" ColumnName="AirportLong" />
+          <ScalarProperty Name="AirportLat" ColumnName="AirportLat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Airlines">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Airline)">
+        <MappingFragment StoreEntitySet="Airlines">
+          <ScalarProperty Name="AirlineId" ColumnName="AirlineId" />
+          <ScalarProperty Name="AirlineName" ColumnName="AirlineName" />
+          <ScalarProperty Name="AirlineImg" ColumnName="AirlineImg" />
+          <ScalarProperty Name="AirlineCode" ColumnName="AirlineCode" />
+          <ScalarProperty Name="AirlineDescription" ColumnName="AirlineDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Rating)">
+        <MappingFragment StoreEntitySet="Ratings">
+          <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+          <ScalarProperty Name="RatingNumber" ColumnName="RatingNumber" />
+          <ScalarProperty Name="RatingImg" ColumnName="RatingImg" />
+          <ScalarProperty Name="RatingDate" ColumnName="RatingDate" />
+          <ScalarProperty Name="RatingDescription" ColumnName="RatingDescription" />
+          <ScalarProperty Name="AirlineId" ColumnName="AirlineId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flights">
+      <EntityTypeMapping TypeName="IsTypeOf(LetsFlyModel.Flight)">
+        <MappingFragment StoreEntitySet="Flights">
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="AirlineId" ColumnName="AirlineId" />
+          <ScalarProperty Name="ArrivalAirport" ColumnName="ArrivalAirport" />
+          <ScalarProperty Name="DepartureAirport" ColumnName="DepartureAirport" />
+          <ScalarProperty Name="AirportId" ColumnName="AirportId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

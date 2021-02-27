@@ -1,0 +1,77 @@
+﻿@model IEnumerable<LetsFly.Models.Airline>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Airlines</h2>
+
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AirlineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirlineImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirlineCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirlineDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirlineName)
+            </td>
+            <td>
+                <img class="img-thumbnail" style="width:75px;height:75px;" src="@Url.Content("~/Uploads/" + item.AirlineImg)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirlineCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirlineDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.AirlineId }) |
+                @if (User.IsInRole("Administrator"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new {id = item.AirlineId})
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+    
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />
+<script src="~/Scripts/DataTable_JavaScript.js"></script>

@@ -1,0 +1,83 @@
+﻿@model LetsFly.Models.Rating
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingNumber)
+        </dt>
+
+        <dd>
+            @*Html.DisplayFor(Model=> model.RatingDescription)*@
+            @Html.Raw(Model.RatingDescription)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingImg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Airline.AirlineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Airline.AirlineName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RatingId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        })
+    </script>
+}
+

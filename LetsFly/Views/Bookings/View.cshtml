@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LetsFly.Models.Booking>
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Bookings</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Flight.FlightNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Flight.FlightNumber)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.BookingNumber }) |*@
+            @Html.ActionLink("Details", "Details", new { id=item.BookingNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BookingNumber })
+        </td>
+    </tr>
+}
+
+</table>

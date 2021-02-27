@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    body {
+        background-image: url('../Uploads/Clouds.jpg');
+        margin: 0;
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .topright {
+        position: absolute;
+        float: right;
+        padding-top: 65px;
+        padding-right: 150px;
+        top: 0px;
+        right: 0px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>Lets Fly!</h1>
+    <p class="lead">We Take You There!</p>
+</div>
+
+<div class ="topright">
+<img  class="mySlides" src="~/Uploads/Sydney.jpg" width="350" height="250" />
+<img class="mySlides" src="~/Uploads/Alice_springs.jpg" width="350" height="250"/>
+<img class="mySlides" src="~/Uploads/Goldcoast.jpg" width="350" height="250" />
+<img  class="mySlides" src="~/Uploads/GOR.jpg" width="350" height="250"/>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Popular Airlines</h2>
+        <button type="button" class="btn btn-info" onclick="location.href = '@Url.Action("Chart", "Home")'">
+            Click Here
+        </button>
+    </div>
+    <div class="col-md-4">
+        <h2>Popular Destinations</h2>
+        <button type="button" class="btn btn-info" onclick="location.href = '@Url.Action("PopularDestinations", "Home")'">
+            Click Here
+        </button>
+    </div>
+    <div class="col-md-4">
+        <h2>Explore Locations</h2>
+        <p>Coming Soon!</p>
+    </div>
+</div>
+
+<script>
+    var slideIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {slideIndex = 1}
+        x[slideIndex-1].style.display = "block";
+        setTimeout(carousel, 5000); // Change image every 5 seconds
+    }
+
+</script>

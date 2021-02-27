@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Most Popular Airlines By Month"
+                },
+                axisY: {
+                    includeZero: false
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: function (e) {
+                        console.log("legend click: " + e.dataPointIndex);
+                        console.log(e);
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        } else {
+                            e.dataSeries.visible = true;
+                        }
+
+                        e.chart.render();
+                    }
+                },
+                data: [{
+                    type: "line",
+                    name: "Virgin",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints1)
+                }, {
+                    type: "line",
+                    name: "Qantas",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints2)
+                }, {
+                    type: "line",
+                    name: "Jetstar",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints3)
+                }]
+            });
+            chart.render();
+
+        }
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>           

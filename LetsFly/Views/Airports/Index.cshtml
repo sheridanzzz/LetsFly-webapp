@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LetsFly.Models.Airport>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Airport Locations</h2>
+@*<div id="map" style="height:300px"></div>
+<style>
+    .overlay {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+    }
+ 
+    .overlay button {
+        font:600 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        background-color: #3386c0;
+        color: #fff;
+        display: inline-block;
+        margin: 0;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+ 
+    .overlay button:hover {
+        background-color:#4ea0da;
+    }
+</style>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js' charset='utf-8'></script>
+ 
+<div id='map'></div>
+
+<div class='overlay'>
+    <button id='replay' >Replay</button>
+</div>*@
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AirportName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirportCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirportLocationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirportLong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirportLat)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="coordinates">
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportName)
+            </td>
+            <td class="description">
+
+                @Html.DisplayFor(modelItem => item.AirportCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirportLocationName)
+            </td>
+            <td class="longitude">
+                @Html.DisplayFor(modelItem => item.AirportLong)
+            </td>
+
+            <td class="latitude">
+                @Html.DisplayFor(modelItem => item.AirportLat)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AirportId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AirportId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AirportId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/mapbox")
+
+}

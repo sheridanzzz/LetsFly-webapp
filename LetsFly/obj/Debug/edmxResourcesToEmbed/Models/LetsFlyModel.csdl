@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="LetsFlyModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="LetsFlyModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="LetsFlyModel.User" />
+    <EntitySet Name="Roles" EntityType="LetsFlyModel.Roles" />
+    <EntitySet Name="Bookings" EntityType="LetsFlyModel.Booking" />
+    <EntitySet Name="Passengers" EntityType="LetsFlyModel.Passenger" />
+    <EntitySet Name="Airports" EntityType="LetsFlyModel.Airport" />
+    <EntitySet Name="Airlines" EntityType="LetsFlyModel.Airline" />
+    <EntitySet Name="Ratings" EntityType="LetsFlyModel.Rating" />
+    <EntitySet Name="Flights" EntityType="LetsFlyModel.Flight" />
+    <AssociationSet Name="BookingPassenger" Association="LetsFlyModel.BookingPassenger">
+      <End Role="Booking" EntitySet="Bookings" />
+      <End Role="Passenger" EntitySet="Passengers" />
+    </AssociationSet>
+    <AssociationSet Name="RatingAirline" Association="LetsFlyModel.RatingAirline">
+      <End Role="Rating" EntitySet="Ratings" />
+      <End Role="Airline" EntitySet="Airlines" />
+    </AssociationSet>
+    <AssociationSet Name="AirlineFlight" Association="LetsFlyModel.AirlineFlight">
+      <End Role="Airline" EntitySet="Airlines" />
+      <End Role="Flight" EntitySet="Flights" />
+    </AssociationSet>
+    <AssociationSet Name="UserBooking" Association="LetsFlyModel.UserBooking">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="LetsFlyModel.UserRoles">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Roles" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="UserRating" Association="LetsFlyModel.UserRating">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Rating" EntitySet="Ratings" />
+    </AssociationSet>
+    <AssociationSet Name="FlightBooking" Association="LetsFlyModel.FlightBooking">
+      <End Role="Flight" EntitySet="Flights" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="AirportFlight" Association="LetsFlyModel.AirportFlight">
+      <End Role="Airport" EntitySet="Airports" />
+      <End Role="Flight" EntitySet="Flights" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="FirstName" Type="String" Nullable="true" />
+    <Property Name="LastName" Type="String" Nullable="true" />
+    <Property Name="PhoneNo" Type="String" Nullable="true" />
+    <Property Name="UserImg" Type="String" Nullable="true" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="LetsFlyModel.UserBooking" FromRole="User" ToRole="Booking" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="Roles" Relationship="LetsFlyModel.UserRoles" FromRole="User" ToRole="Roles" />
+    <NavigationProperty Name="Ratings" Relationship="LetsFlyModel.UserRating" FromRole="User" ToRole="Rating" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RolesId" />
+    </Key>
+    <Property Name="RolesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleType" Type="String" Nullable="true" />
+    <NavigationProperty Name="User" Relationship="LetsFlyModel.UserRoles" FromRole="Roles" ToRole="User" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingNumber" />
+    </Key>
+    <Property Name="BookingNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Price" Type="String" Nullable="true" />
+    <Property Name="State" Type="String" Nullable="true" />
+    <NavigationProperty Name="Passengers" Relationship="LetsFlyModel.BookingPassenger" FromRole="Booking" ToRole="Passenger" />
+    <NavigationProperty Name="User" Relationship="LetsFlyModel.UserBooking" FromRole="Booking" ToRole="User" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Flight" Relationship="LetsFlyModel.FlightBooking" FromRole="Booking" ToRole="Flight" />
+    <Property Name="FlightId" Type="Int32" Nullable="false" />
+    <Property Name="BookingDate" Type="DateTime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Passenger">
+    <Key>
+      <PropertyRef Name="PassengerId" />
+    </Key>
+    <Property Name="PassengerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" />
+    <Property Name="LastName" Type="String" Nullable="false" />
+    <Property Name="PassportNo" Type="String" Nullable="false" />
+    <NavigationProperty Name="Booking" Relationship="LetsFlyModel.BookingPassenger" FromRole="Passenger" ToRole="Booking" />
+    <Property Name="BookingNumber" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Airport">
+    <Key>
+      <PropertyRef Name="AirportId" />
+    </Key>
+    <Property Name="AirportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirportName" Type="String" Nullable="false" />
+    <Property Name="AirportCode" Type="String" Nullable="false" />
+    <Property Name="AirportLocationName" Type="String" Nullable="false" />
+    <Property Name="AirportLong" Type="String" Nullable="false" />
+    <Property Name="AirportLat" Type="String" Nullable="false" />
+    <NavigationProperty Name="Flights" Relationship="LetsFlyModel.AirportFlight" FromRole="Airport" ToRole="Flight" />
+  </EntityType>
+  <EntityType Name="Airline">
+    <Key>
+      <PropertyRef Name="AirlineId" />
+    </Key>
+    <Property Name="AirlineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirlineName" Type="String" Nullable="false" />
+    <Property Name="AirlineImg" Type="String" Nullable="false" />
+    <Property Name="AirlineCode" Type="String" Nullable="false" />
+    <Property Name="AirlineDescription" Type="String" Nullable="true" />
+    <NavigationProperty Name="Ratings" Relationship="LetsFlyModel.RatingAirline" FromRole="Airline" ToRole="Rating" />
+    <NavigationProperty Name="Flights" Relationship="LetsFlyModel.AirlineFlight" FromRole="Airline" ToRole="Flight" />
+  </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="RatingId" />
+    </Key>
+    <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RatingNumber" Type="Int32" Nullable="false" />
+    <Property Name="RatingImg" Type="String" Nullable="true" />
+    <Property Name="RatingDate" Type="DateTime" Nullable="false" />
+    <Property Name="RatingDescription" Type="String" Nullable="true" />
+    <NavigationProperty Name="Airline" Relationship="LetsFlyModel.RatingAirline" FromRole="Rating" ToRole="Airline" />
+    <Property Name="AirlineId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="LetsFlyModel.UserRating" FromRole="Rating" ToRole="User" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="FlightId" />
+    </Key>
+    <Property Name="FlightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlightNumber" Type="String" Nullable="false" />
+    <Property Name="DepartureDate" Type="DateTime" Nullable="false" />
+    <Property Name="ArrivalDate" Type="DateTime" Nullable="false" />
+    <Property Name="Price" Type="String" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="String" Nullable="false" />
+    <NavigationProperty Name="Airline" Relationship="LetsFlyModel.AirlineFlight" FromRole="Flight" ToRole="Airline" />
+    <Property Name="AirlineId" Type="Int32" Nullable="false" />
+    <Property Name="ArrivalAirport" Type="String" Nullable="true" />
+    <Property Name="DepartureAirport" Type="String" Nullable="true" />
+    <NavigationProperty Name="Bookings" Relationship="LetsFlyModel.FlightBooking" FromRole="Flight" ToRole="Booking" />
+    <NavigationProperty Name="Airport" Relationship="LetsFlyModel.AirportFlight" FromRole="Flight" ToRole="Airport" />
+    <Property Name="AirportId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="BookingPassenger">
+    <End Type="LetsFlyModel.Booking" Role="Booking" Multiplicity="1" />
+    <End Type="LetsFlyModel.Passenger" Role="Passenger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingNumber" />
+      </Principal>
+      <Dependent Role="Passenger">
+        <PropertyRef Name="BookingNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RatingAirline">
+    <End Type="LetsFlyModel.Rating" Role="Rating" Multiplicity="*" />
+    <End Type="LetsFlyModel.Airline" Role="Airline" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Airline">
+        <PropertyRef Name="AirlineId" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="AirlineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirlineFlight">
+    <End Type="LetsFlyModel.Airline" Role="Airline" Multiplicity="1" />
+    <End Type="LetsFlyModel.Flight" Role="Flight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airline">
+        <PropertyRef Name="AirlineId" />
+      </Principal>
+      <Dependent Role="Flight">
+        <PropertyRef Name="AirlineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserBooking">
+    <End Type="LetsFlyModel.User" Role="User" Multiplicity="1" />
+    <End Type="LetsFlyModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRoles">
+    <End Type="LetsFlyModel.User" Role="User" Multiplicity="1" />
+    <End Type="LetsFlyModel.Roles" Role="Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Roles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRating">
+    <End Type="LetsFlyModel.User" Role="User" Multiplicity="1" />
+    <End Type="LetsFlyModel.Rating" Role="Rating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FlightBooking">
+    <End Type="LetsFlyModel.Flight" Role="Flight" Multiplicity="1" />
+    <End Type="LetsFlyModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="FlightId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirportFlight">
+    <End Type="LetsFlyModel.Airport" Role="Airport" Multiplicity="1" />
+    <End Type="LetsFlyModel.Flight" Role="Flight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airport">
+        <PropertyRef Name="AirportId" />
+      </Principal>
+      <Dependent Role="Flight">
+        <PropertyRef Name="AirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

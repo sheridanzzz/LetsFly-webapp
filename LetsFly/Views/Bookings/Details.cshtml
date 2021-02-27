@@ -1,0 +1,102 @@
+﻿@using LetsFly.Models
+@model LetsFly.Models.Booking
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight.FlightNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight.FlightNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+           $ @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight.Duration) Mins
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight.ArrivalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight.ArrivalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight.DepartureAirport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight.DepartureAirport)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight.ArrivalAirport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight.ArrivalAirport)
+        </dd>
+        <br /> 
+        <dd>
+            @Html.ActionLink("Download Invoice","PrintInvoice",new {bookid = Model.BookingNumber})
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
