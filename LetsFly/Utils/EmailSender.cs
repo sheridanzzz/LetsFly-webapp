@@ -17,7 +17,7 @@ namespace LetsFly.Utils
     public class EmailSender
     {
 
-        private const String API_KEY = "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";
+        private const String API_KEY = "API_KEY";
 
         //code help from tutorial and send grid documentation
         public void Send(String toEmail, String subject, String contents)
